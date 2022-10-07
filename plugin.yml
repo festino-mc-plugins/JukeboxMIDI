@@ -1,0 +1,8 @@
+name: JukeboxMIDI
+version: 1.0.0
+authors: [FEST_Channel]
+
+description: Convert NoteBlockStudio file to playable disc!
+main: com.festp.Main
+
+api-version: 1.14
