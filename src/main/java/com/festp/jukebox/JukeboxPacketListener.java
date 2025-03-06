@@ -23,7 +23,6 @@ import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.ChannelPromise;
-import net.minecraft.network.protocol.game.PacketPlayOutWorldEvent;
 
 public class JukeboxPacketListener implements Listener {
 	
@@ -62,8 +61,8 @@ public class JukeboxPacketListener implements Listener {
             @Override
             public void write(ChannelHandlerContext channelHandlerContext, Object packet, ChannelPromise channelPromise) throws Exception
             {
-                if (packet instanceof PacketPlayOutWorldEvent) {
-                	Vector3i pos = ReflectionUtils.getBlockPosition((PacketPlayOutWorldEvent)packet);
+                if (ReflectionUtils.getPacketPlayOutWorldEventClass().isInstance(packet)) {
+                	Vector3i pos = ReflectionUtils.getBlockPosition(packet);
                 	World world = player.getWorld();
                 	for (Jukebox jukebox : handler.getClickedJukeboxes()) {
                 		if (jukebox.getWorld() == world && jukebox.getX() == pos.getX() && jukebox.getY() == pos.getY() && jukebox.getZ() == pos.getZ()) {
@@ -79,7 +78,7 @@ public class JukeboxPacketListener implements Listener {
 
         };
 
-        ChannelPipeline pipeline = NettyUtils.getChannel(player).pipeline();
+        ChannelPipeline pipeline = ((Channel)NettyUtils.getChannel(player)).pipeline();
         pipeline.addBefore("packet_handler", player.getName(), channelDuplexHandler);
     }
 

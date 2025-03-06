@@ -265,26 +265,6 @@ public class UtilsType {
 		return is == null || isAir(is.getType());
 	}
 	
-	public static boolean isTransparent(Material m) {
-		if (isAir(m) || is_banner(m) || is_bed(m) || is_carpet(m) || is_wall_banner(m) || isTrapdoor(m) || isDoor(m) || isGate(m)
-				|| isPlant(m) || isPlate(m) || isButton(m) || isRail(m)
-				|| m == Material.TORCH || m == Material.WALL_TORCH|| m == Material.REDSTONE_TORCH || m == Material.REDSTONE_WALL_TORCH
-				|| isSign(m) || isWallSign(m)
-				|| m == Material.FLOWER_POT || m == Material.REDSTONE_WIRE || m == Material.COMPARATOR || m == Material.REPEATER || m == Material.LEVER
-				|| m == Material.TRIPWIRE_HOOK || m == Material.TRIPWIRE
-				|| m == Material.SNOW || isPlessurePlate(m))
-			return true;
-		return false;
-	}
-	
-	public static boolean playerCanStay(Block b) { // TODO: correct slabs
-		return isTransparent(b.getType()) && isTransparent(b.getRelative(0, 1, 0).getType()) && !isTransparent(b.getRelative(0, -1, 0).getType());
-	}
-	
-	public static boolean playerCanFlyOn(Block b) {
-		return isTransparent(b.getRelative(0, 1, 0).getType()) && isTransparent(b.getRelative(0, 2, 0).getType());
-	}
-	
 	public static boolean isInteractable(Material m) {
 		return is_shulker_box(m) || isButton(m) || isWoodenDoor(m) || isGate(m) || isWoodenTrapdoor(m)
 				|| m == Material.CHEST || m == Material.TRAPPED_CHEST || m == Material.ENDER_CHEST || m == Material.FURNACE || m == Material.CRAFTING_TABLE
@@ -661,11 +641,6 @@ public class UtilsType {
 	
 	public static boolean isWaterPlant(Material m) {
 		return m == Material.SEA_PICKLE || m == Material.SEAGRASS || m == Material.TALL_SEAGRASS || m == Material.KELP;
-	}
-
-	public static boolean isPlant(Material m) {
-		return is_flower(m) || isMushroom(m) || isSapling(m) || m == Material.DEAD_BUSH || m == Material.VINE || m == Material.LILY_PAD
-				|| m == Material.GRASS|| m == Material.TALL_GRASS || m == Material.FERN || m == Material.LARGE_FERN;
 	}
 
 	
